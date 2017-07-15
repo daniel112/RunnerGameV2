@@ -103,6 +103,7 @@ func movePlayer(var delta):
 	var moveLeft = move(velocity)
 
 	if(is_colliding()):
+		print(get_collider().get_name())
 		var normal = get_collision_normal() #vector pointing up from ground.
 		var finalMove = normal.slide(moveLeft) #slide removes part of movement that makes character collide
 		speedY = normal.slide(Vector2(0, speedY)).y
