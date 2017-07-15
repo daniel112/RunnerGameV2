@@ -39,7 +39,6 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	if(is_colliding() and get_collider().get_name() == "PlayerBot"): print("AAAAH")
 	#print(player_body.get_item_and_children_rect())
 	#print(get_item_and_children_rect())
 	
@@ -108,7 +107,9 @@ func movePlayer(var delta):
 	var moveLeft = move(velocity)
 
 	if(is_colliding()):
+		if(get_collider().get_name() == "PlayerBot" ): print("SDFSDFS")
 		var normal = get_collision_normal() #vector pointing up from ground.
 		var finalMove = normal.slide(moveLeft) #slide removes part of movement that makes character collide
 		speedY = normal.slide(Vector2(0, speedY)).y
 		move(finalMove)
+		
