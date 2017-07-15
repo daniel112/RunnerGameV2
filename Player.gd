@@ -39,6 +39,7 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
+	if(is_colliding() and get_collider().get_name() == "PlayerBot"): print("AAAAH")
 	#print(player_body.get_item_and_children_rect())
 	#print(get_item_and_children_rect())
 	
@@ -67,12 +68,13 @@ func is_touching_ground():
 	for i in ground_ray_arr:
 		if(i.is_colliding()):
 			ray_is_colliding = true
-		print(i.is_colliding())
+		#print(i.is_colliding())
 	return ray_is_colliding
 
 func _input(event):
+#	print(is_touching_ground())
 	if(event.is_action_pressed("movement_up") and is_touching_ground()):
-		is_jumping = true
+		is_jumping = true #not being used atm
 		speedY = -JUMPFORCE #Y axis is reverse in game engines
 	pass
 
