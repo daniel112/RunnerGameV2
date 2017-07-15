@@ -17,7 +17,7 @@ const MAX_SPEED = 300
 var direction = 0
 var input_direction = 0
 var is_jumping = false
-var newNode = RayCast2D.new()
+
 var test = 0
 onready var ground_ray = get_node("Ground_Ray")
 onready var ground_ray1 = get_node("Ground_Ray1")
@@ -36,6 +36,7 @@ func _ready():
 	set_process_input(true);
 	pass
 
+#Runs every frame
 func _process(delta):
 	movePlayer(delta);
 	#print(player_body.get_item_and_children_rect())
@@ -43,7 +44,7 @@ func _process(delta):
 	
 	pass
 
-
+#Runs at a fixed frame. 
 func _fixed_process(delta):
 	#print(player_body.get_global_pos())
 	var space_state = get_world_2d().get_direct_space_state()
