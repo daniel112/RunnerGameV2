@@ -39,9 +39,6 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	#print(player_body.get_item_and_children_rect())
-	#print(get_item_and_children_rect())
-	
 	pass
 
 #Runs at a fixed frame. 
