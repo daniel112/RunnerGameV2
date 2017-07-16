@@ -5,7 +5,7 @@
 [ext_resource path="res://playerTop.gd" type="Script" id=3]
 [ext_resource path="res://spawnGround.tscn" type="PackedScene" id=4]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 146.883, 10 )
@@ -18,8 +18,8 @@ extents = Vector2( 146.883, 10 )
 
 transform/pos = Vector2( 18.455, -2.05055 )
 input/pickable = false
-shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 650, 468.996 )
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 2.21823, 0, 0, 1, 467.408, 468.996 )
 shapes/0/trigger = false
 collision/layers = 3
 collision/mask = 1
@@ -30,8 +30,9 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform1/StaticBody2D"]
 
-transform/pos = Vector2( 650, 468.996 )
-shape = SubResource( 2 )
+transform/pos = Vector2( 467.408, 468.996 )
+transform/scale = Vector2( 2.21823, 1 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
@@ -44,7 +45,7 @@ scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
 
-transform/pos = Vector2( 512.826, 385.558 )
+transform/pos = Vector2( 512.826, 384.198 )
 transform/scale = Vector2( 1.02557, 1.02557 )
 texture = ExtResource( 1 )
 
