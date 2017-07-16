@@ -13,7 +13,7 @@ func _ready():
 	pass
 	
 func _fixed_process(delta):
-	set_global_pos(Vector2(get_global_pos().x + (delta * scrollspeed), get_global_pos().y)) 
+	set_pos(Vector2(get_pos().x + (delta * scrollspeed), get_pos().y)) 
 	pass
 
 func getOffSet():

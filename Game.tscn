@@ -72,8 +72,7 @@ transform/scale = Vector2( 1.44468, 2.02924 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
-offset = Vector2( 512, 385 )
-anchor_mode = 1
+anchor_mode = 0
 rotating = false
 current = true
 zoom = Vector2( 1, 1 )

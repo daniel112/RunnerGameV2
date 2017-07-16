@@ -21,9 +21,9 @@ func _ready():
 func _fixed_process(delta):
 	print("CAMERA COORDS: " + str(camera.get_global_pos()))
 	print("End of level COORDS: " + str(EndLevel.get_global_pos()))
-	if(EndLevel.get_global_pos().x < camera.get_global_pos().x and !didEmit):
+	if(EndLevel.get_global_pos().x < camera.get_pos().x and !didEmit):
 		emit_signal("levelDestroyed")
 		didEmit = true
-	if(EndLevel.get_global_pos().x + 150 < camera.get_global_pos().x):
+	if(EndLevel.get_global_pos().x + 150 < camera.get_pos().x):
 		queue_free()
 	pass
