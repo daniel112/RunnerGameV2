@@ -1,5 +1,9 @@
 extends Position2D
 
+#this class will need to pick a random "level" scene from a list of level scenes and 
+#spawn them on a timer.
+
+
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
@@ -15,7 +19,6 @@ func _ready():
 
 func _fixed_process(delta):
 	if(!spawned):
-		print("can instance" + str(ground_scene.can_instance()))
 		var ground_instance = ground_scene.instance()
 		gameScene.add_child(ground_instance)
 		#the below is unnecessary as it can be set in the GroundNode.tscn

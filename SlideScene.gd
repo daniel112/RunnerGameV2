@@ -19,14 +19,12 @@ func _fixed_process(delta):
 	pass
 
 func moveGround(delta):
-
+	xPosition = get_global_pos().x
 	yPosition = get_global_pos().y
 	if(xPosition != 0):
 		var blockMovement = Vector2(-1 * blockMoveSpeed * delta, 0)
 		move(blockMovement)
-		xPosition = get_global_pos().x
-		print("Y pos: " + str(yPosition))
-		print("X pos: " + str(xPosition))
-		set_global_pos(Vector2(xPosition, get_global_pos().y))
-		yPosition = get_global_pos()
+		#print("Y pos: " + str(yPosition))
+		#print("X pos: " + str(xPosition))
+
 	pass

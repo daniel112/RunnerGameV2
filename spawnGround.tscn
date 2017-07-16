@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=1]
 
-[ext_resource path="res://spawnGround.gd" type="Script" id=1]
+[ext_resource path="res://SpawnLevel.gd" type="Script" id=1]
 
 [node name="spawnGround" type="Position2D"]
 
