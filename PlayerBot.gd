@@ -29,7 +29,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 #	print(self.get_name())
-	print(get_tree().get_root().get_node("Game").get_children()[0].get_children()[0])
+	print(get_parent().get_node("PlayerTop").get_name())
 	set_process(true);
 	set_fixed_process(true);
 	set_process_input(true);
@@ -43,7 +43,18 @@ func _process(delta):
 	#Eventually once we have more time we should do collision detection based on if they "will collide" rather than if they are
 	#Currently colliding.
 	#Creation of collisions infront of player detection.
-	
+	var space_state = get_world_2d().get_direct_space_state()
+	var result = space_state.intersect_ray(get_global_pos(), Vector2(1000, get_global_pos().y), [self])
+	if(not result.empty()):
+		print(result["collider"])
+		var coll = result["collider"]
+		print(coll.get_name())
+		var distToObstacle = abs(coll.get_global_pos().x - get_global_pos().x)
+		if(distToObstacle < 22):
+			print("dist to obstacle is: " + str(distToObstacle))
+			move(coll.get_travel() * 2)
+		else:
+			print("not close enough")
 	pass
 
 #Runs at a fixed frame. 
@@ -105,8 +116,9 @@ func groundPhysics():
 	if(not result.empty()):
 		#print(result["position"])
 		var collide = result["collider"]
-		var distToGround = abs(get_global_pos().y - collide.get_global_pos().y)
-		print(distToGround)
+		print(collide.get_name())
+		var distToGround = abs(get_children()[0].get_global_pos().y - collide.get_global_pos().y)
+		print("dist to ground: " + str(distToGround))
 		#print(collide.get_name())
 		#change this second condition to a group eventually.
 		if(distToGround < 43 and collide.get_name() == "platformCollision"):
@@ -116,7 +128,7 @@ func groundPhysics():
 			currentCollision = collide
 			canJump = true
 		else:
-			print("dist to ground > 40")
+			#print("dist to ground > 40")
 			currentCollision = null
 			currentlyColliding = false
 			is_in_air = true
@@ -124,22 +136,22 @@ func groundPhysics():
 	else:
 		is_in_air = true
 		currentCollision = null
-		print("no result found")
+		#print("no result found")
 
 	if(is_in_air):
 		gravity = 1000
 	else:
-		print("not in air")
+		#print("not in air")
 		gravity = 0
 		speedY = 0
 	if(currentlyColliding and currentCollision != null and currentCollision.get_name() == "platformCollision"):
 		if(currentCollision != null):
-			print(currentCollision.get_travel())
+			#print(currentCollision.get_travel())
 			move(currentCollision.get_travel())
 	else:
 		if(currentCollision == null):
 			print("collision is null")
 		else:
 			print("collision is not null")
-		print(gravity)
-		print("wat")
+		#print(gravity)
+		#print("wat")
