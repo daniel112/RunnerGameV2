@@ -10,7 +10,7 @@ extents = Vector2( 32.093, 8.39941 )
 [sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
+extents = Vector2( 17.4545, 5.4026 )
 
 [node name="Level1Node2D" type="Node2D"]
 
@@ -46,19 +46,16 @@ _update_shape_index = 0
 
 [node name="Node2D" type="Node2D" parent="."]
 
-transform/pos = Vector2( 624, 704 )
+transform/pos = Vector2( 368, 704 )
 transform/scale = Vector2( 0.5, 0.5 )
-__meta__ = {
-"_edit_group_": true
-}
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+[node name="platformCollision" type="StaticBody2D" parent="Node2D"]
 
-transform/pos = Vector2( -1.90735e-06, 1.90735e-06 )
-transform/scale = Vector2( 2, 2 )
+transform/pos = Vector2( 112, -64 )
+transform/scale = Vector2( 5.5, 4 )
 input/pickable = false
 shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 2.96154, 0, 25.5 )
+shapes/0/transform = Matrix32( 1, 0, 0, 2.96154, 2.90909, 24 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -67,9 +64,9 @@ constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/platformCollision"]
 
-transform/pos = Vector2( 0, 25.5 )
+transform/pos = Vector2( 2.90909, 24 )
 transform/scale = Vector2( 1, 2.96154 )
 shape = SubResource( 2 )
 trigger = false
