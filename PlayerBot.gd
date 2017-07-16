@@ -19,8 +19,11 @@ var input_direction = 0
 var is_jumping = false
 var is_in_air = false
 #----
-var currentCollision
-var currentlyColliding = false
+var currentCollisionY
+var currentCollisionX
+var currentlyCollidingX = false
+var currentlyCollidingY = false
+var canMoveRight = true
 #----
 
 onready var playerNodeName = null
@@ -39,44 +42,11 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	var space_state = get_world_2d().get_direct_space_state()
-	var result = space_state.intersect_ray(get_global_pos(), Vector2(get_global_pos().x, 1000), [self])
-	if(not result.empty()):
-		#print(result["position"])
-		var collide = result["collider"]
-		var distToGround = abs(get_global_pos().y - collide.get_global_pos().y)
-		#print(distToGround)
-		#print(collide.get_name())
-		#change this second condition to a group eventually.
-		if(distToGround < 43 and collide.get_name() == "platformCollision"):
-			#print("dist to ground < 40")
-			is_in_air = false
-			currentlyColliding = true
-			currentCollision = collide
-			canJump = true
-		else:
-			#print("dist to ground > 40")
-			currentCollision = null
-			currentlyColliding = false
-			is_in_air = true
-			canJump = false
-	else:
-		currentCollision = null
-		print("no result found")
-	if(is_in_air):
-		gravity = 1000
-	else:
-		#print("not in air")
-		gravity = 0
-		speedY = 0
-
-
-	if(currentlyColliding and currentCollision != null and currentCollision.get_name() == "platformCollision"):
-		if(currentCollision != null):
-			print(currentCollision.get_travel())
-			move(currentCollision.get_travel())
-	else:
-		print("wat")
+	groundPhysics()
+	#Eventually once we have more time we should do collision detection based on if they "will collide" rather than if they are
+	#Currently colliding.
+	#Creation of collisions infront of player detection.
+	
 	pass
 
 #Runs at a fixed frame. 
@@ -100,6 +70,7 @@ func movePlayer(var delta):
 	if(input_direction):
 		direction = input_direction
 	#new direction
+	
 	if(Input.is_action_pressed("movement_right_Arrow")):
 		input_direction = 1
 	elif(Input.is_action_pressed("movement_left_Arrow")):
@@ -115,13 +86,19 @@ func movePlayer(var delta):
 	if input_direction:
 		speedX += ACCELERATION * delta
 	else:
+		canMoveRight = true
 		speedX -= DECELERATION * delta
 	
 	
 	speedY += gravity * delta #Y movement speed.
 	velocity.y = speedY * delta #
 	speedX = clamp(speedX, 0, MAX_SPEED) #Clamp - if first param lower than 0. it will set to 2nd param. If higher than MAX_SPEED will set to set to 3rd param
-	velocity.x = speedX * delta * direction
+	if(canMoveRight):
+		velocity.x = speedX * delta * direction
+	elif(!canMoveRight and !input_direction):
+		velocity.x = speedX * delta * direction
+	else:
+		velocity.x = 0
 	var moveLeft = move(velocity)
 
 	if(is_colliding()):
@@ -132,3 +109,47 @@ func movePlayer(var delta):
 		move(finalMove)
 	pass
 ##################end movePlayer()
+func groundPhysics():
+	var space_state = get_world_2d().get_direct_space_state()
+	var result = space_state.intersect_ray(get_global_pos(), Vector2(get_global_pos().x, 1000), [self])
+	if(not result.empty()):
+		#print(result["position"])
+		var collide = result["collider"]
+		print("this: " + str(collide.get_name()))
+		var distToGround = abs(get_global_pos().y - collide.get_global_pos().y)
+		print(distToGround)
+		#change this second condition to a group eventually.
+		print("dist to ground: " + str(distToGround))
+		if(distToGround < 43 and collide.get_name() == "platformCollision"):
+			#print("dist to ground < 40")
+			is_in_air = false
+			currentlyCollidingY = true
+			currentCollisionY = collide
+			canJump = true
+		else:
+			#print("dist to ground > 40")
+			currentCollisionY = null
+			currentlyCollidingY = false
+			is_in_air = true
+			canJump = false
+	else:
+		is_in_air = true
+		currentCollisionY = null
+		#print("no result found")
+	if(is_in_air):
+		gravity = 1000
+	else:
+		#print("not in air")
+		gravity = 0
+		speedY = 0
+	if(currentlyCollidingY and currentCollisionY != null and currentCollisionY.get_name() == "platformCollision"):
+		if(currentCollisionY != null):
+			print(currentCollisionY.get_travel())
+			move(currentCollisionY.get_travel())
+	else:
+		if(currentCollisionY == null):
+			print("collision is null")
+		else:
+			print("collision is not null")
+			#print(gravity)
+			#print("wat")

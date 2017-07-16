@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://freetileset/png/BG/BG.png" type="Texture" id=1]
 [ext_resource path="res://Player2D.tscn" type="PackedScene" id=2]
@@ -8,47 +8,20 @@
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 148.626, 18.1577 )
-
-[sub_resource type="RectangleShape2D" id=2]
-
-custom_solver_bias = 0.0
-extents = Vector2( 146.883, 10 )
+extents = Vector2( 10, 10 )
 
 [node name="Game" type="Node"]
 
-[node name="platform" type="Node2D" parent="."]
-
-transform/pos = Vector2( 150, 738 )
-
-[node name="platformCollision1" type="StaticBody2D" parent="platform"]
-
-input/pickable = false
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, -1, 15 )
-shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
-constant_linear_velocity = Vector2( 0, 0 )
-constant_angular_velocity = 0.0
-friction = 1.0
-bounce = 0.0
-
-[node name="CollisionShape" type="CollisionShape2D" parent="platform/platformCollision1"]
-
-transform/pos = Vector2( -1, 15 )
-shape = SubResource( 1 )
-trigger = false
-_update_shape_index = 0
-
+<<<<<<< HEAD
+=======
 [node name="platform1" type="Node2D" parent="."]
 
 [node name="StaticBody2D" type="StaticBody2D" parent="platform1"]
 
 transform/pos = Vector2( 18.455, -2.05055 )
 input/pickable = false
-shapes/0/shape = SubResource( 2 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 650, 468.996 )
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 2.21823, 0, 0, 1, 467.408, 468.996 )
 shapes/0/trigger = false
 collision/layers = 3
 collision/mask = 1
@@ -59,11 +32,13 @@ bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform1/StaticBody2D"]
 
-transform/pos = Vector2( 650, 468.996 )
-shape = SubResource( 2 )
+transform/pos = Vector2( 467.408, 468.996 )
+transform/scale = Vector2( 2.21823, 1 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
+>>>>>>> 3cce15ff143cdc8dd57c23840c7e122db76f9b68
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 layer = -1
@@ -73,7 +48,11 @@ scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
 
-transform/pos = Vector2( 512.826, 385.558 )
+<<<<<<< HEAD
+transform/pos = Vector2( 512.826, 388.265 )
+=======
+transform/pos = Vector2( 512.826, 384.198 )
+>>>>>>> 3cce15ff143cdc8dd57c23840c7e122db76f9b68
 transform/scale = Vector2( 1.02557, 1.02557 )
 texture = ExtResource( 1 )
 
@@ -89,11 +68,31 @@ transform/pos = Vector2( 0, -1.10803 )
 
 [node name="PlayerBot" parent="." instance=ExtResource( 2 )]
 
-transform/pos = Vector2( 460.41, 343.902 )
+transform/pos = Vector2( 592.793, 142.604 )
 
 [node name="spawnGround" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 492.97, 393.466 )
+transform/pos = Vector2( 1.67023, -1.10513 )
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="platformCollision" type="KinematicBody2D" parent="Node2D"]
+
+transform/pos = Vector2( 589.34, 227.9 )
+input/pickable = false
+shapes/0/shape = SubResource( 1 )
+shapes/0/transform = Matrix32( 10, 0, 0, 1, 0, 0 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+collision/margin = 0.08
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/platformCollision"]
+
+transform/scale = Vector2( 10, 1 )
+shape = SubResource( 1 )
+trigger = false
+_update_shape_index = 0
 
 
 [editable path="PlayerTop"]
