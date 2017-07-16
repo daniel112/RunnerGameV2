@@ -32,7 +32,7 @@ func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 #	print(self.get_name())
-	print(get_tree().get_root().get_node("Game").get_children()[0].get_children()[0])
+
 	set_process(true);
 	set_fixed_process(true);
 	set_process_input(true);
@@ -129,6 +129,7 @@ func movePlayer(var delta):
 
 #TODO:
 	#1.Spawn combinedPlayerEntity (spawn player2D for now)
+	#1.1 delete playerTop and Bot after
 	#2. Delete combinedPlayerEntity on JUMP
 	#3. Repeat
 	
@@ -141,14 +142,19 @@ func OnTop():
 	
 	#spawning the combined entity
 func CombinedEntity():
-	var combinedPlayers = preload("res://Player2D.tscn") #get the entity to spawn
+	var PlayerBot = get_parent().get_node("PlayerBot")
+	var combinedPlayers = preload("res://PlayerCombined2.tscn") #get the entity to spawn
 	var combinedInstance = combinedPlayers.instance()
-	gameScene.add_child(combinedInstance)
-	combinedInstance.set_pos(Vector2(get_global_pos().x,0))
+
+	combinedInstance.set_pos(Vector2(PlayerBot.get_global_pos().x,PlayerBot.get_global_pos().y))
 	combinedInstance.set_name("PlayerCombined")
+	gameScene.add_child(combinedInstance)
 	print("Combined Entity:", combinedInstance.get_name())
 	CombinedEntitySpawned = true
+	#remove self and player under and replace with new entity
 	
+	PlayerBot.queue_free()
+	self.queue_free()
 	
 func groundPhysics():
 	var space_state = get_world_2d().get_direct_space_state()
@@ -157,7 +163,6 @@ func groundPhysics():
 		#print(result["position"])
 		var collide = result["collider"]
 		var distToGround = abs(get_global_pos().y - collide.get_global_pos().y)
-		print(distToGround)
 		#print(collide.get_name())
 		#change this second condition to a group eventually.
 		if(distToGround < 43 and collide.get_name() == "platformCollision"):
@@ -167,7 +172,6 @@ func groundPhysics():
 			currentCollision = collide
 			canJump = true
 		else:
-			print("dist to ground > 40")
 			currentCollision = null
 			currentlyColliding = false
 			is_in_air = true
@@ -175,22 +179,13 @@ func groundPhysics():
 	else:
 		is_in_air = true
 		currentCollision = null
-		print("no result found")
 
 	if(is_in_air):
 		gravity = 1000
 	else:
-		print("not in air")
 		gravity = 0
 		speedY = 0
 	if(currentlyColliding and currentCollision != null and currentCollision.get_name() == "platformCollision"):
 		if(currentCollision != null):
-			print(currentCollision.get_travel())
 			move(currentCollision.get_travel())
-	else:
-		if(currentCollision == null):
-			print("collision is null")
-		else:
-			print("collision is not null")
-		print(gravity)
-		print("wat")
+
