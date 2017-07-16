@@ -42,7 +42,7 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	groundPhysics()
+	#groundPhysics()
 	CheckPartnerCollision()
 
 	pass
@@ -114,7 +114,9 @@ func movePlayer(var delta):
 		var yPositionSelf = self.get_global_pos().y
 		
 		#check who its collider is
-		if(get_collider().get_name() == "platformCollision"): onTopOfPlayer= false
+		if(get_collider().get_name() == "platformCollision"): 
+			onTopOfPlayer= false
+			canJump = true
 		
 		if(get_collider().get_name() == "PlayerBot" and yPositionSelf+50 < yPositionOther): 
 			onTopOfPlayer= true

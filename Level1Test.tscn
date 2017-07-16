@@ -1,38 +1,82 @@
-[gd_scene load_steps=3 format=1]
+[gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://SlideScene.gd" type="Script" id=1]
+[ext_resource path="res://DestroyLevel.gd" type="Script" id=1]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 31.9837, 8.39941 )
+extents = Vector2( 32.093, 8.39941 )
+
+[sub_resource type="RectangleShape2D" id=2]
+
+custom_solver_bias = 0.0
+extents = Vector2( 10, 10 )
 
 [node name="Level1Node2D" type="Node2D"]
 
+script/script = ExtResource( 1 )
+
 [node name="FlatPlatform" type="Node2D" parent="."]
 
-transform/pos = Vector2( 511.342, 755.342 )
-transform/scale = Vector2( 15.9413, 0.397693 )
+transform/pos = Vector2( 512, 752 )
+transform/scale = Vector2( 15.9697, 0.255674 )
 
-[node name="platformCollision" type="KinematicBody2D" parent="FlatPlatform"]
+[node name="platformCollision" type="StaticBody2D" parent="FlatPlatform"]
 
-transform/pos = Vector2( -0.0142241, -5.12552 )
-transform/scale = Vector2( 1.00133, 0.387797 )
+transform/pos = Vector2( -0.0283916, -0.709949 )
+transform/scale = Vector2( 1.00089, 0.977806 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 3.59998, 0.105579, 0.0867019 )
+shapes/0/transform = Matrix32( 1, 0, 0, 3.59998, -0.0322952, 32 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
-collision/margin = 0.08
-script/script = ExtResource( 1 )
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlatPlatform/platformCollision"]
 
-transform/pos = Vector2( 0.105579, 0.0867019 )
+transform/pos = Vector2( -0.0322952, 32 )
 transform/scale = Vector2( 1, 3.59998 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
+
+[node name="Node2D" type="Node2D" parent="."]
+
+transform/pos = Vector2( 624, 704 )
+transform/scale = Vector2( 0.5, 0.5 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Node2D"]
+
+transform/pos = Vector2( -1.90735e-06, 1.90735e-06 )
+transform/scale = Vector2( 2, 2 )
+input/pickable = false
+shapes/0/shape = SubResource( 2 )
+shapes/0/transform = Matrix32( 1, 0, 0, 2.96154, 0, 25.5 )
+shapes/0/trigger = false
+collision/layers = 1
+collision/mask = 1
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 1.0
+bounce = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/StaticBody2D"]
+
+transform/pos = Vector2( 0, 25.5 )
+transform/scale = Vector2( 1, 2.96154 )
+shape = SubResource( 2 )
+trigger = false
+_update_shape_index = 0
+
+[node name="EndLevelPos" type="Position2D" parent="."]
+
+transform/pos = Vector2( 1024, 0 )
 
 
