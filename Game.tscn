@@ -1,11 +1,22 @@
 [gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://freetileset/png/BG/BG.png" type="Texture" id=1]
+<<<<<<< HEAD
 [ext_resource path="res://PlayerBot.gd" type="Script" id=2]
 [ext_resource path="res://freeknight/png/Idle (8).png" type="Texture" id=3]
 [ext_resource path="res://PlayerNode2D.tscn" type="PackedScene" id=4]
+=======
+[ext_resource path="res://Player2D.tscn" type="PackedScene" id=2]
+[ext_resource path="res://playerTop.gd" type="Script" id=3]
+[ext_resource path="res://spawnGround.tscn" type="PackedScene" id=4]
+>>>>>>> Ryan-Branch
 
 [sub_resource type="RectangleShape2D" id=1]
+
+custom_solver_bias = 0.0
+extents = Vector2( 148.626, 18.1577 )
+
+[sub_resource type="RectangleShape2D" id=2]
 
 custom_solver_bias = 0.0
 extents = Vector2( 146.883, 10 )
@@ -19,38 +30,35 @@ extents = Vector2( 10.6229, 14.1493 )
 
 [node name="platform" type="Node2D" parent="."]
 
-editor/display_folded = true
+transform/pos = Vector2( 150, 738 )
 
-[node name="StaticBody2D" type="StaticBody2D" parent="platform"]
+[node name="platformCollision1" type="StaticBody2D" parent="platform"]
 
-transform/pos = Vector2( 18.455, -2.05055 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 289.746, 468.996 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, -1, 15 )
 shapes/0/trigger = false
-collision/layers = 3
+collision/layers = 1
 collision/mask = 1
 constant_linear_velocity = Vector2( 0, 0 )
 constant_angular_velocity = 0.0
 friction = 1.0
 bounce = 0.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="platform/StaticBody2D"]
+[node name="CollisionShape" type="CollisionShape2D" parent="platform/platformCollision1"]
 
-transform/pos = Vector2( 289.746, 468.996 )
+transform/pos = Vector2( -1, 15 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 
 [node name="platform1" type="Node2D" parent="."]
 
-editor/display_folded = true
-
 [node name="StaticBody2D" type="StaticBody2D" parent="platform1"]
 
 transform/pos = Vector2( 18.455, -2.05055 )
 input/pickable = false
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 2 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 650, 468.996 )
 shapes/0/trigger = false
 collision/layers = 3
@@ -63,7 +71,7 @@ bounce = 0.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="platform1/StaticBody2D"]
 
 transform/pos = Vector2( 650, 468.996 )
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 trigger = false
 _update_shape_index = 0
 
@@ -76,9 +84,11 @@ scale = Vector2( 1, 1 )
 
 [node name="Sprite" type="Sprite" parent="CanvasLayer"]
 
-transform/pos = Vector2( 500.04, 375.968 )
+transform/pos = Vector2( 512.826, 385.558 )
+transform/scale = Vector2( 1.02557, 1.02557 )
 texture = ExtResource( 1 )
 
+<<<<<<< HEAD
 [node name="PlayerBot" type="KinematicBody2D" parent="."]
 
 editor/display_folded = true
@@ -109,6 +119,26 @@ _update_shape_index = 0
 [node name="PlayerNode" parent="." instance=ExtResource( 4 )]
 
 transform/pos = Vector2( 360.097, 390.782 )
+=======
+[node name="PlayerTop" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 654.939, 371.211 )
+script/script = ExtResource( 3 )
+
+[node name="Sprite" parent="PlayerTop"]
+
+visibility/blend_mode = 0
+transform/pos = Vector2( 0, -1.10803 )
+
+[node name="PlayerBot" parent="." instance=ExtResource( 2 )]
+
+transform/pos = Vector2( 50.4146, 687.575 )
+
+[node name="spawnGround" parent="." instance=ExtResource( 4 )]
+
+transform/pos = Vector2( 492.97, 393.466 )
+>>>>>>> Ryan-Branch
 
 
-[editable path="PlayerNode"]
+[editable path="PlayerTop"]
+[editable path="PlayerBot"]

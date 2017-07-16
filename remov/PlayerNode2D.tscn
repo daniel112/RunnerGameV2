@@ -16,8 +16,8 @@ input/pickable = false
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1.3138, 0, 0, 1.13852, -1.48771, 1.79415 )
 shapes/0/trigger = false
-collision/layers = 1
-collision/mask = 1
+collision/layers = 5
+collision/mask = 5
 collision/margin = 0.08
 script/script = ExtResource( 1 )
 
@@ -31,7 +31,7 @@ texture = ExtResource( 2 )
 
 enabled = true
 cast_to = Vector2( 0, 25 )
-layer_mask = 2
+layer_mask = 6
 type_mask = 15
 
 [node name="Ground_Ray1" type="RayCast2D" parent="KinematicPlayerBody"]
@@ -39,7 +39,7 @@ type_mask = 15
 transform/pos = Vector2( 11.5, 0 )
 enabled = true
 cast_to = Vector2( 0, 25 )
-layer_mask = 2
+layer_mask = 6
 type_mask = 15
 
 [node name="Ground_Ray2" type="RayCast2D" parent="KinematicPlayerBody"]
@@ -47,7 +47,7 @@ type_mask = 15
 transform/pos = Vector2( -14.3, 0 )
 enabled = true
 cast_to = Vector2( 0, 25 )
-layer_mask = 2
+layer_mask = 6
 type_mask = 15
 
 [node name="PlayerBody" type="CollisionShape2D" parent="KinematicPlayerBody"]

@@ -10,7 +10,7 @@ var speedY = 0 #Y movement speed of player.
 
 const ACCELERATION = 700 
 const DECELERATION = 1000
-const GRAVITY = 1000
+var gravity = 1000
 var velocity = Vector2()
 var JUMPFORCE = 400
 const MAX_SPEED = 300
@@ -39,10 +39,13 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
+<<<<<<< HEAD:Player.gd
 	if(is_colliding() and get_collider().get_name() == "PlayerBot"): print("AAAAH")
 	#print(player_body.get_item_and_children_rect())
 	#print(get_item_and_children_rect())
 	
+=======
+>>>>>>> Ryan-Branch:remov/Player.gd
 	pass
 
 #Runs at a fixed frame. 
@@ -101,7 +104,7 @@ func movePlayer(var delta):
 	else:
 		speedX -= DECELERATION * delta
 	
-	speedY += GRAVITY * delta #Y movement speed.
+	speedY += gravity * delta #Y movement speed.
 	velocity.y = speedY * delta #
 	speedX = clamp(speedX, 0, MAX_SPEED) #Clamp - if first param lower than 0. it will set to 2nd param. If higher than MAX_SPEED will set to set to 3rd param
 	velocity.x = speedX * delta * direction
