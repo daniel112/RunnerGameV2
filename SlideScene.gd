@@ -3,7 +3,7 @@ extends KinematicBody2D
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var blockMoveSpeed = 100
+var blockMoveSpeed = 15
 var xPosition
 var yPosition
 

@@ -55,9 +55,19 @@ script/script = ExtResource( 3 )
 visibility/blend_mode = 0
 transform/pos = Vector2( 0, -1.10803 )
 
+[node name="CollisionShape2D" parent="PlayerTop"]
+
+transform/pos = Vector2( -6.04782, 0.934525 )
+transform/scale = Vector2( 1.44468, 2.00604 )
+
 [node name="PlayerBot" parent="." instance=ExtResource( 2 )]
 
 transform/pos = Vector2( 460.41, 343.902 )
+
+[node name="CollisionShape2D" parent="PlayerBot"]
+
+transform/pos = Vector2( -6.04782, 1.33243 )
+transform/scale = Vector2( 1.44468, 2.02924 )
 
 [node name="spawnGround" parent="." instance=ExtResource( 4 )]
 

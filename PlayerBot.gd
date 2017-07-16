@@ -39,10 +39,16 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	groundPhysics()
+
 	#Eventually once we have more time we should do collision detection based on if they "will collide" rather than if they are
 	#Currently colliding.
 	#Creation of collisions infront of player detection.
+	
+	pass
+
+#Runs at a fixed frame. 
+func _fixed_process(delta):
+	groundPhysics()
 	var space_state = get_world_2d().get_direct_space_state()
 	var result = space_state.intersect_ray(get_global_pos(), Vector2(1000, get_global_pos().y), [self])
 	if(not result.empty()):
@@ -55,11 +61,6 @@ func _process(delta):
 			move(coll.get_travel() * 2)
 		else:
 			print("not close enough")
-	pass
-
-#Runs at a fixed frame. 
-func _fixed_process(delta):
-	
 	pass
 
 
