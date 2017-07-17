@@ -3,7 +3,7 @@
 [ext_resource path="res://PlayerBot.gd" type="Script" id=1]
 [ext_resource path="res://freetileset/png/Object/Bush (2).png" type="Texture" id=2]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
 extents = Vector2( 10, 10 )
@@ -11,7 +11,7 @@ extents = Vector2( 10, 10 )
 [node name="KinematicBody2D" type="KinematicBody2D"]
 
 input/pickable = false
-shapes/0/shape = SubResource( 2 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1.44468, 0, 0, 2.10173, -6.04782, 2.5 )
 shapes/0/trigger = false
 collision/layers = 1
@@ -27,7 +27,7 @@ texture = ExtResource( 2 )
 
 transform/pos = Vector2( -6.04782, 2.5 )
 transform/scale = Vector2( 1.44468, 2.10173 )
-shape = SubResource( 2 )
+shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0
 

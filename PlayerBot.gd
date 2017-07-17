@@ -72,11 +72,9 @@ func _fixed_process(delta):
 func SplitEntity():
 	var combinedPlayers = preload("res://Player2D.tscn") #get the entity to spawn
 	var combinedInstance = combinedPlayers.instance()
-
 	combinedInstance.set_pos(Vector2(self.get_global_pos().x,self.get_global_pos().y))
 	combinedInstance.set_name("PlayerTop")
 	get_parent().add_child(combinedInstance)
-	
 	self.queue_free()
 
 func _input(event):
