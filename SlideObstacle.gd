@@ -22,9 +22,8 @@ func moveGround(delta):
 	xPosition = get_global_pos().x
 	yPosition = get_global_pos().y
 	if(xPosition != 0):
-		var blockMovement = Vector2(-1 * blockMoveSpeed * delta, 0)
+		var blockMovement = Vector2(-2 * blockMoveSpeed * delta, 0)
 		move(blockMovement)
 		#print("Y pos: " + str(yPosition))
 		#print("X pos: " + str(xPosition))
-
 	pass

@@ -1,19 +1,18 @@
 [gd_scene load_steps=4 format=1]
 
-[ext_resource path="res://PlayerBot.gd" type="Script" id=1]
-[ext_resource path="res://Mammoth 128.png" type="Texture" id=2]
+[ext_resource path="res://PlayerTop.gd" type="Script" id=1]
+[ext_resource path="res://caveman 128.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 
 custom_solver_bias = 0.0
-extents = Vector2( 10.6229, 14.1493 )
+extents = Vector2( 10, 25.8598 )
 
-[node name="PlayerBot" type="KinematicBody2D"]
+[node name="PlayerTop" type="KinematicBody2D"]
 
-transform/pos = Vector2( 260.581, 374.159 )
 input/pickable = false
 shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1.44468, 0, 0, 2.10173, -6.04782, 2.57562 )
+shapes/0/transform = Matrix32( 0.795613, 0, 0, 1.10566, -5.78182, 9.54461 )
 shapes/0/trigger = false
 collision/layers = 1
 collision/mask = 1
@@ -22,14 +21,12 @@ script/script = ExtResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 
-visibility/blend_mode = 2
-transform/scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 
-transform/pos = Vector2( -6.04782, 2.57562 )
-transform/scale = Vector2( 1.44468, 2.10173 )
+transform/pos = Vector2( -5.78182, 9.54461 )
+transform/scale = Vector2( 0.795613, 1.10566 )
 shape = SubResource( 1 )
 trigger = false
 _update_shape_index = 0

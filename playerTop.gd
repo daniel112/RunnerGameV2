@@ -26,13 +26,13 @@ var currentlyColliding = false
 var onTopOfPlayer = false
 var CombinedEntitySpawned = false
 onready var playerNodeName = null
-onready var gameScene = get_parent()
+onready var gameScene = get_tree().get_root().get_node("Game")
 
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
 #	print(self.get_name())
-
+	print(get_tree().get_root().get_node("Game").get_children()[0].get_children()[0])
 	set_process(true);
 	set_fixed_process(true);
 	set_process_input(true);
@@ -42,7 +42,7 @@ func _ready():
 #Runs every frame
 func _process(delta):
 	movePlayer(delta);
-	groundPhysics()
+	#groundPhysics()
 	CheckPartnerCollision()
 
 	pass
@@ -76,6 +76,12 @@ func _input(event):
 			speedY = -JUMPFORCE #Y axis is reverse in game engines
 	pass
 
+func setMoveFrom(var transferedY, var transferedX, var inputDirection, var oldDirection, var delta):
+	#speedY = transferedY * delta - JUMPFORCE
+	#speedX += transferedX
+	#input_direction = inputDirection
+	 #getprocessdeltatime?
+	print("fu")
 
 func movePlayer(var delta):
 	#INPUT
@@ -114,7 +120,9 @@ func movePlayer(var delta):
 		var yPositionSelf = self.get_global_pos().y
 		
 		#check who its collider is
-		if(get_collider().get_name() == "platformCollision"): onTopOfPlayer= false
+		if(get_collider().get_name() == "platformCollision"): 
+			onTopOfPlayer= false
+			canJump = true
 		
 		if(get_collider().get_name() == "PlayerBot" and yPositionSelf+50 < yPositionOther): 
 			onTopOfPlayer= true
@@ -129,7 +137,6 @@ func movePlayer(var delta):
 
 #TODO:
 	#1.Spawn combinedPlayerEntity (spawn player2D for now)
-	#1.1 delete playerTop and Bot after
 	#2. Delete combinedPlayerEntity on JUMP
 	#3. Repeat
 	
@@ -143,27 +150,30 @@ func OnTop():
 	#spawning the combined entity
 func CombinedEntity():
 	var PlayerBot = get_parent().get_node("PlayerBot")
-	var combinedPlayers = preload("res://PlayerCombined2.tscn") #get the entity to spawn
+	var combinedPlayers = preload("res://CombinedPlayer3.tscn") #get the entity to spawn
 	var combinedInstance = combinedPlayers.instance()
 
 	combinedInstance.set_pos(Vector2(PlayerBot.get_global_pos().x,PlayerBot.get_global_pos().y))
 	combinedInstance.set_name("PlayerCombined")
 	gameScene.add_child(combinedInstance)
+	print(combinedInstance.get_parent().get_name())
+	get_parent().get_node("PlayerBot").queue_free()
+	queue_free()
 	print("Combined Entity:", combinedInstance.get_name())
 	CombinedEntitySpawned = true
-	#remove self and player under and replace with new entity
-	
-	PlayerBot.queue_free()
-	self.queue_free()
-	
+	for i in gameScene.get_children():
+		print("child " + str(i) + "'s name: " + i.get_name()) 
+
+
+
+
 func groundPhysics():
 	var space_state = get_world_2d().get_direct_space_state()
 	var result = space_state.intersect_ray(get_global_pos(), Vector2(get_global_pos().x, 1000), [self])
 	if(not result.empty()):
-		#print(result["position"])
 		var collide = result["collider"]
 		var distToGround = abs(get_global_pos().y - collide.get_global_pos().y)
-		#print(collide.get_name())
+		print(distToGround)
 		#change this second condition to a group eventually.
 		if(distToGround < 43 and collide.get_name() == "platformCollision"):
 			#print("dist to ground < 40")
@@ -172,6 +182,7 @@ func groundPhysics():
 			currentCollision = collide
 			canJump = true
 		else:
+			print("dist to ground > 40")
 			currentCollision = null
 			currentlyColliding = false
 			is_in_air = true
@@ -179,13 +190,22 @@ func groundPhysics():
 	else:
 		is_in_air = true
 		currentCollision = null
+		print("no result found")
 
 	if(is_in_air):
 		gravity = 1000
 	else:
+		print("not in air")
 		gravity = 0
 		speedY = 0
 	if(currentlyColliding and currentCollision != null and currentCollision.get_name() == "platformCollision"):
 		if(currentCollision != null):
+			print(currentCollision.get_travel())
 			move(currentCollision.get_travel())
-
+	else:
+		if(currentCollision == null):
+			print("collision is null")
+		else:
+			print("collision is not null")
+		print(gravity)
+		print("wat")

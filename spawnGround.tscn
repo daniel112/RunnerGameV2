@@ -4,8 +4,6 @@
 
 [node name="spawnGround" type="Position2D"]
 
-transform/pos = Vector2( 752.25, 324.047 )
-transform/scale = Vector2( 3, 1.03876 )
 script/script = ExtResource( 1 )
 
 

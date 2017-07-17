@@ -10,11 +10,13 @@ extends Position2D
 var spawned = false
 var ground_scene = preload("res://Level1Test.tscn")
 #var ground_scene = preload("res://GroundNode.tscn")
-onready var gameScene = get_parent()
+var gameScene
 func _ready():
 	# Called every time the node is added to the scene.
 	# Initialization here
-	
+	print(ground_scene)
+	gameScene = get_tree().get_root().get_node("Game")
+	gameScene = gameScene.get_node("SpawnLevelObj")
 	set_fixed_process(true)
 	pass
 
